@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariam Kintsurashvili – Frontend Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #080A0F;
+    --surface: #0E1117;
+    --card: #13181F;
+    --border: #1E2530;
+    --blue: #3B82F6;
+    --blue-glow: rgba(59,130,246,0.15);
+    --blue-dim: rgba(59,130,246,0.08);
+    --white: #F0F4FF;
+    --muted: #6B7A99;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(8,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+
+  .logo span { color: var(--blue); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--blue-dim);
+    border: 2px solid rgba(59,130,246,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    max-width: 700px;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(135deg, #3B82F6, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  /* Georgian bio */
+  .hero-geo {
+    color: rgba(107,122,153,0.7);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .hero p.bio {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 500px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 24px rgba(59,130,246,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 36px rgba(59,130,246,0.5);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue);
+    background: var(--blue-dim);
+  }
+
+  /* ── SKILLS ── */
+  .skills-section {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 48px;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .skill-tag {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--blue);
+    background: var(--blue-dim);
+  }
+
+  .skill-tag .dot {
+    width: 8px; height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-section {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    text-align: left;
+    margin-top: 48px;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: rgba(59,130,246,0.4);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .project-icon {
+    width: 52px; height: 52px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .project-badge {
+    background: var(--blue-dim);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .project-card h3 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  .project-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .project-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .project-link {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .project-link:hover { gap: 10px; }
+
+  /* ── ABOUT ── */
+  .about-section {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .about-text .section-label { text-align: left; }
+  .about-text .section-title { text-align: left; font-size: 28px; margin-bottom: 16px; }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .about-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .about-stat-num {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: -1px;
+  }
+
+  .about-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    max-width: 900px;
+    margin: 0 auto 100px;
+    padding: 0 24px;
+  }
+
+  .cta-inner {
+    background: linear-gradient(135deg, #0E1117, #13181F);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-inner::before {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-inner h2 {
+    font-family: var(--display);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .cta-inner p {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer p { color: var(--muted); font-size: 13px; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    nav ul { display: none; }
+    .about-card { grid-template-columns: 1fr; padding: 32px 24px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .cta-inner { padding: 48px 24px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Mariam<span>.</span></div>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="https://github.com/kintsurashvilimariam-ai" target="_blank" class="nav-cta">GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="avatar">👩‍💻</div>
+  <div class="eyebrow">Open to work</div>
+  <h1>Hi, I'm <span class="accent">Mariam</span></h1>
+  <p class="hero-sub">Aspiring Frontend Developer · Kutaisi, Georgia 🇬🇪</p>
+  <p class="hero-geo">მომავალი ფრონტ-ენდ დეველოპერი ქუთაისიდან</p>
+  <p class="bio">Fresh developer with big dreams, building the web from Kutaisi 🇬🇪🚀</p>
+  <div class="hero-buttons">
+    <a href="#projects" class="btn-primary">See my work →</a>
+    <a href="https://github.com/kintsurashvilimariam-ai" target="_blank" class="btn-secondary">GitHub Profile</a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="section-label">What I know</div>
+  <h2 class="section-title">My Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-tag"><span class="dot"></span>HTML</div>
+    <div class="skill-tag"><span class="dot"></span>CSS</div>
+    <div class="skill-tag"><span class="dot"></span>JavaScript <span style="color:var(--muted);font-size:11px;">learning</span></div>
+    <div class="skill-tag"><span class="dot"></span>Responsive Design</div>
+    <div class="skill-tag"><span class="dot"></span>GitHub</div>
+    <div class="skill-tag"><span class="dot"></span>UI Design Basics</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-label">What I built</div>
+  <h2 class="section-title">My Projects</h2>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">⚡</div>
+        <div class="project-badge">Featured</div>
+      </div>
+      <h3>Zyntrix – AI Startup Landing Page</h3>
+      <p>A modern, dark-themed landing page for a fictional AI infrastructure startup. Built with pure HTML and CSS — no frameworks, no shortcuts. Features smooth hover animations, a responsive grid, and a clean design system.</p>
+      <div class="project-tags">
+        <span class="project-tag">HTML</span>
+        <span class="project-tag">CSS</span>
+        <span class="project-tag">Responsive</span>
+        <span class="project-tag">Animations</span>
+      </div>
+      <a href="https://github.com/kintsurashvilimariam-ai" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">👜</div>
+        <div class="project-badge">Featured</div>
+      </div>
+      <h3>GoGo Handmade – Brand Landing Page</h3>
+      <p>A clean, minimal landing page for a real handmade bag business based in Kutaisi, Georgia. Built with pure HTML and CSS, featuring a photo gallery, brand storytelling, and direct links to social channels.</p>
+      <div class="project-tags">
+        <span class="project-tag">HTML</span>
+        <span class="project-tag">CSS</span>
+        <span class="project-tag">Real Client</span>
+        <span class="project-tag">Responsive</span>
+      </div>
+      <a href="https://github.com/kintsurashvilimariam-ai" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-card">
+    <div class="about-text">
+      <div class="section-label">Who I am</div>
+      <h2 class="section-title">About Me</h2>
+      <p>I'm Mariam, a self-taught frontend developer from Kutaisi, Georgia. I started coding from scratch on my phone — no computer, no degree, just pure determination.</p>
+      <p>I believe the best way to learn is to build real things. Every project teaches me something new.</p>
+      <p style="color:rgba(107,122,153,0.7); font-size:13px; font-style:italic;">მე ვარ დამწყები ფრონტ-ენდ დეველოპერი ქუთაისიდან. მიყვარს კოდირება.</p>
+    </div>
+    <div class="about-stats">
+      <div class="about-stat">
+        <div class="about-stat-num">🇬🇪</div>
+        <div class="about-stat-label">From Georgia</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">💻</div>
+        <div class="about-stat-label">Self taught</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">∞</div>
+        <div class="about-stat-label">Determination</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">🚀</div>
+        <div class="about-stat-label">Big dream</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Let's build something together 🚀</h2>
+    <p>I'm available for freelance projects and open to new opportunities.</p>
+    <a href="https://github.com/kintsurashvilimariam-ai" target="_blank" class="btn-primary">Find me on GitHub →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Mariam<span style="color:var(--blue)">.</span></div>
+  <p>Built with HTML & CSS · ქუთაისი, Georgia 🇬🇪 · © 2026</p>
+</footer>
+
+</body>
+</html>
